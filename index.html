@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INNOAHOU Design Services</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
+        }
+        
+        .poster {
+            width: 900px;
+            min-height: 1400px;
+            background: white;
+            margin: 0 auto;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .lang-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .lang-btn.active {
+            background: linear-gradient(45deg, #ff1493, #00bfff);
+            color: white;
+        }
+        
+        .lang-btn:not(.active) {
+            background: rgba(255,255,255,0.8);
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,20,147,0.1), transparent, rgba(0,191,255,0.1), transparent);
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo-container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ff1493, #00bfff, #32cd32, #ffa500, #ff6347);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 4px;
+            text-shadow: 0 0 30px rgba(255,255,255,0.5);
+        }
+        
+        .tagline {
+            color: white;
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            color: #4ecdc4;
+            font-size: 16px;
+            font-weight: 300;
+            margin-top: 20px;
+        }
+        
+        .main-content {
+            padding: 40px 30px;
+            background: white;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+            background: linear-gradient(45deg, #ff1493, #00bfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #ff1493, #00bfff, #32cd32) 1;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .service-card:hover::before {
+            left: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .service-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1a1a2e;
+        }
+        
+        .service-price {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff1493, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+        
+        .service-details {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        
+        .service-delivery {
+            background: linear-gradient(45deg, #32cd32, #00bfff);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        
+        .service-includes {
+            color: #28a745;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .service-addons {
+            color: #6c757d;
+            font-size: 12px;
+            font-style: italic;
+        }
+        
+        .packages-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 40px 30px;
+            margin: 0 -30px;
+        }
+        
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+        }
+        
+        .package-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #ff1493, #00bfff, #32cd32, #ffa500);
+            z-index: -1;
+            margin: -3px;
+            border-radius: inherit;
+        }
+        
+        .package-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ff1493, #00bfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .package-items {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .package-pricing {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .regular-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 16px;
+        }
+        
+        .package-price {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #32cd32, #00bfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .savings {
+            background: linear-gradient(45deg, #ff1493, #ffa500);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 40px 30px;
+            margin: 40px -30px -20px -30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .contact-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff1493, #00bfff, #32cd32);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .contact-number {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #4ecdc4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .payment-info, .additional-info {
+            font-size: 16px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .highlight {
+            background: linear-gradient(45deg, #ff1493, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="language-toggle">
+            <button class="lang-btn active" onclick="switchLanguage('en')">English</button>
+            <button class="lang-btn" onclick="switchLanguage('fr')">Français</button>
+        </div>
+        
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo">INNOAHOU</div>
+                <div class="tagline" data-en="GRAPHIC DESIGN SERVICES" data-fr="SERVICES DE CONCEPTION GRAPHIQUE">GRAPHIC DESIGN SERVICES</div>
+                <div class="subtitle" data-en="Visuals That Make You Stand Out" data-fr="Des visuels qui vous démarquent">Visuals That Make You Stand Out</div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="section">
+                <h2 class="section-title" data-en="Core Services" data-fr="Services Principaux">Core Services</h2>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-title" data-en="Posters & Flyers" data-fr="Affiches et Dépliants">Posters & Flyers</div>
+                        <div class="service-price">2,000 - 3,000 CFA</div>
+                        <div class="service-details" data-en="Single-sided design for digital sharing or basic printing with basic text and images" data-fr="Design recto pour partage numérique ou impression de base avec texte et images simples">Single-sided design for digital sharing or basic printing with basic text and images</div>
+                        <div class="service-delivery" data-en="2-3 business days" data-fr="2-3 jours ouvrables">2-3 business days</div>
+                        <div class="service-includes" data-en="Includes: 2 rounds of revisions" data-fr="Inclus: 2 séries de révisions">Includes: 2 rounds of revisions</div>
+                        <div class="service-addons" data-en="Add-ons: Double-sided and Complex design (+1,000 CFA)" data-fr="Options: Design recto-verso et complexe (+1,000 CFA)">Add-ons: Double-sided and Complex design (+1,000 CFA)</div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-title" data-en="PowerPoint Presentations" data-fr="Présentations PowerPoint">PowerPoint Presentations</div>
+                        <div class="service-price">2,000 - 4,000 CFA</div>
+                        <div class="service-details" data-en="Basic formatting and clean-up of up to 10-15 client-provided slides with standard theme" data-fr="Formatage de base et nettoyage de 10-15 diapositives fournies par le client avec thème standard">Basic formatting and clean-up of up to 10-15 client-provided slides with standard theme</div>
+                        <div class="service-delivery" data-en="3-5 business days" data-fr="3-5 jours ouvrables">3-5 business days</div>
+                        <div class="service-includes" data-en="Includes: 2 rounds of revisions" data-fr="Inclus: 2 séries de révisions">Includes: 2 rounds of revisions</div>
+                        <div class="service-addons" data-en="Additional slides (+200 CFA each)" data-fr="Diapositives supplémentaires (+200 CFA chacune)">Add-ons: Additional slides (+200 CFA each)</div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-title" data-en="Business Logos" data-fr="Logos d'Entreprise">Business Logos</div>
+                        <div class="service-price">4,000 - 6,000 CFA</div>
+                        <div class="service-details" data-en="Minimalist logo design, text-based or simple icon, one concept with minor adjustments" data-fr="Design de logo minimaliste, basé sur le texte ou icône simple, un concept avec ajustements mineurs">Minimalist logo design, text-based or simple icon, one concept with minor adjustments</div>
+                        <div class="service-delivery" data-en="5-7 business days" data-fr="5-7 jours ouvrables">5-7 business days</div>
+                        <div class="service-includes" data-en="Includes: 2 rounds of revisions" data-fr="Inclus: 2 séries de révisions">Includes: 2 rounds of revisions</div>
+                        <div class="service-addons" data-en="Add-ons: Additional concepts (+1,000 CFA each), Complex/unique design (+2,000 CFA)" data-fr="Options: Concepts supplémentaires (+1,000 CFA chacun), Design complexe/unique (+2,000 CFA)">Add-ons: Additional concepts (+1,000 CFA each), Complex/unique design (+2,000 CFA)</div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-title" data-en="Business Card Design" data-fr="Design de Cartes de Visite">Business Card Design</div>
+                        <div class="service-price">1,500 - 3,000 CFA</div>
+                        <div class="service-details" data-en="Standard, single-sided layout using your provided logo and contact details" data-fr="Mise en page standard recto avec votre logo et coordonnées fournis">Standard, single-sided layout using your provided logo and contact details</div>
+                        <div class="service-delivery" data-en="1-2 business days" data-fr="1-2 jours ouvrables">1-2 business days</div>
+                        <div class="service-includes" data-en="Includes: 2 rounds of revisions" data-fr="Inclus: 2 séries de révisions">Includes: 2 rounds of revisions</div>
+                        <div class="service-addons" data-en="Add-ons: Double-sided (+1,000 CFA), Premium design (+1,500 CFA)" data-fr="Options: Recto-verso (+1,000 CFA), Design premium (+1,500 CFA)">Add-ons: Double-sided (+1,000 CFA), Premium design (+1,500 CFA)</div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-title" data-en="Social Media Graphics" data-fr="Graphiques Réseaux Sociaux">Social Media Graphics</div>
+                        <div class="service-price">2,000 - 3,000 CFA</div>
+                        <div class="service-details" data-en="Static graphics for Facebook, Instagram, WhatsApp business posts" data-fr="Graphiques statiques pour publications Facebook, Instagram, WhatsApp Business">Static graphics for Facebook, Instagram, WhatsApp business posts</div>
+                        <div class="service-delivery" data-en="2-3 business days" data-fr="2-3 jours ouvrables">2-3 business days</div>
+                        <div class="service-includes" data-en="Includes: 2 rounds of revisions" data-fr="Inclus: 2 séries de révisions">Includes: 2 rounds of revisions</div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-title" data-en="Brand Advertisement Video Services" data-fr="Services Vidéo Publicitaire">Brand Advertisement Video Services</div>
+                        <div class="service-price">5,000 - 10,000 CFA</div>
+                        <div class="service-details" data-en="Short animated commercial/motion graphics, Video editing with your provided videos and images, Social media video content" data-fr="Court métrage publicitaire animé/motion graphics, Montage vidéo avec vos vidéos et images, Contenu vidéo pour réseaux sociaux">Short animated commercial/motion graphics, Video editing with your provided videos and images, Social media video content</div>
+                        <div class="service-delivery" data-en="5-10 business days" data-fr="5-10 jours ouvrables">5-10 business days</div>
+                        <div class="service-includes" data-en="Includes: 2 rounds of revisions" data-fr="Inclus: 2 séries de révisions">Includes: 2 rounds of revisions</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="packages-section">
+                <h2 class="section-title" data-en="Package Deals - Save Money!" data-fr="Offres Groupées - Économisez!">Package Deals - Save Money!</h2>
+                
+                <div class="package-grid">
+                    <div class="package-card">
+                        <div class="package-name" data-en="Startup Bundle" data-fr="Pack Démarrage">Startup Bundle</div>
+                        <div class="package-items" data-en="Business Logo + Business Card + 2 Posters + 1 Social Media Graphic" data-fr="Logo d'Entreprise + Carte de Visite + 2 Affiches + 1 Graphique Réseaux Sociaux">Business Logo + Business Card + 2 Posters + 1 Social Media Graphic</div>
+                        <div class="package-pricing">
+                            <span class="regular-price">14,000 CFA</span>
+                            <span class="package-price">12,000 CFA</span>
+                        </div>
+                        <div class="savings" data-en="Save 2,000 CFA" data-fr="Économisez 2,000 CFA">Save 2,000 CFA</div>
+                    </div>
+                    
+                    <div class="package-card">
+                        <div class="package-name" data-en="Marketing Package" data-fr="Pack Marketing">Marketing Package</div>
+                        <div class="package-items" data-en="2 Posters + 1 Brand Advertisement" data-fr="2 Affiches + 1 Publicité de Marque">2 Posters + 1 Brand Advertisement</div>
+                        <div class="package-pricing">
+                            <span class="regular-price">16,000 CFA</span>
+                            <span class="package-price">14,000 CFA</span>
+                        </div>
+                        <div class="savings" data-en="Save 2,000 CFA" data-fr="Économisez 2,000 CFA">Save 2,000 CFA</div>
+                    </div>
+                    
+                    <div class="package-card">
+                        <div class="package-name" data-en="Complete Brand Package" data-fr="Pack Marque Complète">Complete Brand Package</div>
+                        <div class="package-items" data-en="Logo + Business Card + 2 Posters + PowerPoint + 1 Social Media + 1 Brand Advertisement" data-fr="Logo + Carte de Visite + 2 Affiches + PowerPoint + 1 Réseaux Sociaux + 1 Publicité">Logo + Business Card + 2 Posters + PowerPoint + 1 Social Media + 1 Brand Advertisement</div>
+                        <div class="package-pricing">
+                            <span class="regular-price">29,000 CFA</span>
+                            <span class="package-price">22,000 CFA</span>
+                        </div>
+                        <div class="savings" data-en="Save 7,000 CFA" data-fr="Économisez 7,000 CFA">Save 7,000 CFA</div>
+                    </div>
+                    
+                    <div class="package-card">
+                        <div class="package-name" data-en="Complete Deal" data-fr="Offre Complète">Complete Deal</div>
+                        <div class="package-items" data-en="Logo + Business Card + 2 Posters + 1 Social Media + 1 Brand Advertisement" data-fr="Logo + Carte de Visite + 2 Affiches + 1 Réseaux Sociaux + 1 Publicité">Logo + Business Card + 2 Posters + 1 Social Media + 1 Brand Advertisement</div>
+                        <div class="package-pricing">
+                            <span class="regular-price">25,000 CFA</span>
+                            <span class="package-price">20,000 CFA</span>
+                        </div>
+                        <div class="savings" data-en="Save 5,000 CFA" data-fr="Économisez 5,000 CFA">Save 5,000 CFA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-section">
+            <div class="contact-title" data-en="Contact Today" data-fr="Contactez Aujourd'hui">Contact Today</div>
+            <div class="contact-number">0545969223</div>
+            <div class="payment-info" data-en="Payment methods: Wave, Cash" data-fr="Méthodes de paiement: Wave, Espèces">Payment methods: Wave, Cash</div>
+            <div class="additional-info" data-en="You give me your text and pictures if any" data-fr="Vous me donnez votre texte et images si disponibles">You give me your text and pictures if any</div>
+            <div class="additional-info" data-en="I will give you the design in normal formats (PNG, JPG, PDF etc.)" data-fr="Je vous donnerai le design dans les formats normaux (PNG, JPG, PDF etc.)">I will give you the design in normal formats (PNG, JPG, PDF etc.)</div>
+            <div class="additional-info" data-en="You can ask for changes within 1 week" data-fr="Vous pouvez demander des modifications dans la semaine">You can ask for changes within 1 week</div>
+            <div class="additional-info" data-en="You can use the design for your business" data-fr="Vous pouvez utiliser le design pour votre entreprise">You can use the design for your business</div>
+            <div class="additional-info" data-en="Fast jobs depend on if I'm free" data-fr="Les travaux rapides dépendent de ma disponibilité">Fast jobs depend on if I'm free</div>
+        </div>
+    </div>
+    
+    <script>
+        function switchLanguage(lang) {
+            // Update button states
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-en]').forEach(element => {
+                if (lang === 'en') {
+                    element.textContent = element.getAttribute('data-en');
+                } else {
+                    element.textContent = element.getAttribute('data-fr');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
